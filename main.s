@@ -2,21 +2,24 @@
 .segment "CODE"
 
 .proc Main
-; Loading the registers
-ldx #05
-ldy #04
+  ; Initialize some RAM
+  ldx #$B2
+  stx $00
+  ldx #$F5
+  stx $01
 
-; Incrementing X by two.
-inx
-inx
+  ; Add $00 and $01
+  lda $00
+  clc
+  adc $01
 
-; Incrementing Y by two.
-iny
-iny
+  ; Store the first byte of the result to $02
+  sta $02
 
-; Decrementing Y and then X by one.
-dey
-dex
+  ; Add the carry bit to zero and store it into $03
+  lda #0
+  adc #0
+  sta $03
 
 rts
 .endproc
